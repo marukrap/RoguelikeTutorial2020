@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Engine/Renderer.hpp"
 #include "Entity.hpp"
 #include "Map.hpp"
-#include "Fov.hpp"
+#include "Engine/Renderer.hpp"
+#include "Engine/Fov.hpp"
 
 class Console;
 

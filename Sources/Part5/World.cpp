@@ -33,7 +33,7 @@ World::World(int mapWidth, int mapHeight)
 		}
 	}
 
-	m_fov = std::make_unique<Fov>(*m_map);
+	m_fov = std::make_unique<Fov>(mapWidth, mapHeight, [this] (const Vec2i& pos) { return m_map->at(pos).transparent; });
 }
 
 void World::movePlayer(int dx, int dy)
@@ -86,10 +86,10 @@ void World::update(Console& console)
 		{
 			const Tile& tile = m_map->at(x, y);
 
-			if (tile.visible)
+			if (m_fov->isVisible({ x, y }))
 				console.setChar(x, y, tile.ch, tile.color);
 
-			else if (tile.explored)
+			else if (m_fov->isExplroed({ x, y }))
 			{
 				Color color = tile.color;
 				color.r /= 5;
@@ -103,7 +103,7 @@ void World::update(Console& console)
 	{
 		const Vec2i pos = entity->getPosition();
 
-		if (m_map->at(pos).visible)
+		if (m_fov->isVisible(pos))
 			console.setChar(pos.x, pos.y, entity->getChar(), entity->getColor());
 	}
 

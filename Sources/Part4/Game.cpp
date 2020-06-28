@@ -10,7 +10,10 @@ Game::Game(SDL_Window& window, Console& console)
 {
 	glClearColor(0.f, 0.f, 0.f, 1.f);
 
-	m_map = std::make_unique<Map>(console.getWidth(), console.getHeight());
+	const int mapWidth = console.getWidth();
+	const int mapHeight = console.getHeight();
+
+	m_map = std::make_unique<Map>(mapWidth, mapHeight);
 	Rng rng;
 
 	const auto rooms = generateDungeon(*m_map, rng);
@@ -23,7 +26,7 @@ Game::Game(SDL_Window& window, Console& console)
 	m_player = entity.get();
 	m_entities.push_back(std::move(entity));
 
-	m_fov = std::make_unique<Fov>(*m_map);
+	m_fov = std::make_unique<Fov>(mapWidth, mapHeight, [this] (const Vec2i& pos) { return m_map->at(pos).transparent; });
 }
 
 bool Game::isRunning() const
@@ -101,10 +104,10 @@ void Game::update()
 		{
 			const Tile& tile = m_map->at(x, y);
 
-			if (tile.visible)
+			if (m_fov->isVisible({ x, y }))
 				m_console.setChar(x, y, tile.ch, tile.color);
 
-			else if (tile.explored)
+			else if (m_fov->isExplroed({ x, y }))
 			{
 				Color color = tile.color;
 				color.r /= 5;
@@ -118,7 +121,7 @@ void Game::update()
 	{
 		const Vec2i pos = entity->getPosition();
 
-		if (m_map->at(pos).visible)
+		if (m_fov->isVisible(pos))
 			m_console.setChar(pos.x, pos.y, entity->getChar(), entity->getColor());
 	}
 

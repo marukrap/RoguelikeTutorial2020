@@ -1,35 +1,40 @@
 #include "Fov.hpp"
-#include "Map.hpp"
 
 #include <algorithm> // min, max
 
-Fov::Fov(Map& map)
-	: m_map(&map)
+Fov::Fov(int width, int height, std::function<bool(Vec2i)> isTransparent)
+	: m_width(width)
+	, m_height(height)
+	, m_visible(width * height, false)
+	, m_explored(width * height, false)
+	, isTransparent(isTransparent)
 {
-}
-
-void Fov::setMap(Map& map)
-{
-	m_map = &map;
 }
 
 void Fov::clear()
 {
-	for (int y = 0; y < m_map->getHeight(); ++y)
-		for (int x = 0; x < m_map->getWidth(); ++x)
-			m_map->at(x, y).visible = false;
+	std::fill(m_visible.begin(), m_visible.end(), false);
 }
 
 void Fov::compute(const Vec2i& position, int range)
 {
 	if (range >= 0)
 	{
-		m_map->at(position).visible = true;
-		m_map->at(position).explored = true;
+		setVisible(position, true);
 
 		for (int octant = 0; octant < 8; ++octant)
 			refreshOctant(octant, position, range);
 	}
+}
+
+bool Fov::isVisible(const Vec2i& position) const
+{
+	return m_visible[position.x + position.y * m_width];
+}
+
+bool Fov::isExplroed(const Vec2i& position) const
+{
+	return m_explored[position.x + position.y * m_width];
 }
 
 bool Fov::Shadow::contains(const Shadow& projection) const
@@ -92,6 +97,19 @@ bool Fov::addShadow(const Shadow& shadow)
 	return (m_shadows.size() == 1) && (m_shadows[0].start == 0.f) && (m_shadows[0].end == 1.f);
 }
 
+bool Fov::isInBounds(const Vec2i& position) const
+{
+	return position.x >= 0 && position.x < m_width && position.y >= 0 && position.y < m_height;
+}
+
+void Fov::setVisible(const Vec2i& position, bool flag)
+{
+	const int i = position.x + position.y * m_width;
+
+	m_visible[i] = flag;
+	m_explored[i] = flag;
+}
+
 void Fov::refreshOctant(int octant, const Vec2i& start, int range)
 {
 	Vec2i rowInc;
@@ -117,7 +135,7 @@ void Fov::refreshOctant(int octant, const Vec2i& start, int range)
 	{
 		Vec2i pos = start + (rowInc * row);
 
-		if (!m_map->isInBounds(pos))
+		if (!isInBounds(pos))
 			break;
 
 		for (int col = 0; col <= row; ++col)
@@ -132,17 +150,16 @@ void Fov::refreshOctant(int octant, const Vec2i& start, int range)
 
 				if (!isInShadow(projection))
 				{
-					m_map->at(pos).visible = true;
-					m_map->at(pos).explored = true;
+					setVisible(pos, true);
 
-					if (!m_map->at(pos).transparent)
+					if (!isTransparent(pos))
 						fullShadow = addShadow(projection);
 				}
 			}
 
 			pos += colInc;
 
-			if (!m_map->isInBounds(pos))
+			if (!isInBounds(pos))
 				break;
 		}
 	}

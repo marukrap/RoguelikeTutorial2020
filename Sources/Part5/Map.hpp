@@ -11,8 +11,6 @@ struct Tile
 	Color color = 0xFFFFFF;
 	bool passable = false;
 	bool transparent = false;
-	bool visible = false;
-	bool explored = false;
 };
 
 class Map

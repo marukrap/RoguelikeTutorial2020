@@ -2,23 +2,22 @@
 
 #pragma once
 
-#include "Engine/Vector2.hpp"
+#include "Vector2.hpp"
 
+#include <functional>
 #include <vector>
-
-class Map;
 
 // Field of view
 class Fov
 {
 public:
-	Fov() = default;
-	explicit Fov(Map& map);
-
-	void setMap(Map& map);
+	Fov(int width, int height, std::function<bool(Vec2i)> isTransparent);
 
 	void clear();
 	void compute(const Vec2i& position, int range);
+
+	bool isVisible(const Vec2i& position) const;
+	bool isExplroed(const Vec2i& position) const;
 
 private:
 	struct Shadow
@@ -32,9 +31,15 @@ private:
 	bool isInShadow(const Shadow& projection) const;
 	bool addShadow(const Shadow& shadow);
 
+	bool isInBounds(const Vec2i& position) const;
+	void setVisible(const Vec2i& position, bool flag);
 	void refreshOctant(int octant, const Vec2i& start, int range);
 
 private:
-	Map* m_map = nullptr;
+	int m_width;
+	int m_height;
+	std::vector<bool> m_visible;
+	std::vector<bool> m_explored;
 	std::vector<Shadow> m_shadows;
+	std::function<bool(Vec2i)> isTransparent;
 };
