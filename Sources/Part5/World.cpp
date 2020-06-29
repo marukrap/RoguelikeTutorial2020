@@ -33,7 +33,7 @@ World::World(int mapWidth, int mapHeight)
 		}
 	}
 
-	m_fov = std::make_unique<Fov>(mapWidth, mapHeight, [this] (const Vec2i& pos) { return m_map->at(pos).transparent; });
+	m_fov = std::make_unique<Fov>(mapWidth, mapHeight, [this] (const Vec2i& pos) { return !m_map->at(pos).transparent; });
 }
 
 void World::movePlayer(int dx, int dy)

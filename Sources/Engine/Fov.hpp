@@ -11,7 +11,10 @@
 class Fov
 {
 public:
-	Fov(int width, int height, std::function<bool(Vec2i)> isTransparent);
+	using BlocksViewFunction = std::function<bool(Vec2i)>;
+
+public:
+	Fov(int width, int height, BlocksViewFunction blocksView);
 
 	void clear();
 	void compute(const Vec2i& position, int range);
@@ -41,5 +44,5 @@ private:
 	std::vector<bool> m_visible;
 	std::vector<bool> m_explored;
 	std::vector<Shadow> m_shadows;
-	std::function<bool(Vec2i)> isTransparent;
+	BlocksViewFunction m_blocksView;
 };

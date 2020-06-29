@@ -1,11 +1,13 @@
 #include "AStar.hpp"
 #include "Direction.hpp"
 
-AStar::AStar(int width, int height, std::function<bool(Vec2i)> isPassable)
+AStar::AStar(int width, int height, PassableFunction isPassable)
 	: m_width(width)
 	, m_height(height)
-	, m_cells(width * height)
-	, isPassable(isPassable)
+	, m_maxCost(std::numeric_limits<decltype(m_maxCost)>::max())
+	, m_cells(width* height)
+	, m_isPassable(std::move(isPassable))
+	, m_heuristic(&Heuristic::roguelike)
 {
 }
 
@@ -61,7 +63,7 @@ std::vector<Vec2i> AStar::findPath(const Vec2i& start, const Vec2i& end)
 		{
 			const Vec2i next = current + directions[i];
 
-			if (!isInBounds(next) || !isPassable(next))
+			if (!isInBounds(next) || !m_isPassable(next))
 				continue;
 
 			Cell& nextCell = cell(next);

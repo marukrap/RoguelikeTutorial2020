@@ -2,12 +2,12 @@
 
 #include <algorithm> // min, max
 
-Fov::Fov(int width, int height, std::function<bool(Vec2i)> isTransparent)
+Fov::Fov(int width, int height, BlocksViewFunction blocksView)
 	: m_width(width)
 	, m_height(height)
 	, m_visible(width * height, false)
 	, m_explored(width * height, false)
-	, isTransparent(isTransparent)
+	, m_blocksView(std::move(blocksView))
 {
 }
 
@@ -152,7 +152,7 @@ void Fov::refreshOctant(int octant, const Vec2i& start, int range)
 				{
 					setVisible(pos, true);
 
-					if (!isTransparent(pos))
+					if (m_blocksView(pos))
 						fullShadow = addShadow(projection);
 				}
 			}

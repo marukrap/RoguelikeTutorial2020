@@ -10,6 +10,7 @@
 class AStar
 {
 public:
+	using PassableFunction = std::function<bool(Vec2i)>;
 	using HeuristicFunction = std::function<std::size_t(Vec2i, Vec2i)>;
 
 	struct Heuristic
@@ -21,7 +22,7 @@ public:
 	};
 
 public:
-	AStar(int width, int height, std::function<bool(Vec2i)> isPassable);
+	AStar(int width, int height, PassableFunction isPassable);
 
 	void setMaxCost(std::size_t maxCost); // Max search depth
 	void setHeuristic(HeuristicFunction heuristic);
@@ -56,11 +57,11 @@ private:
 private:
 	int m_width;
 	int m_height;
+	std::size_t m_maxCost;
 	std::vector<Cell> m_cells;
 	std::priority_queue<OpenNode, std::vector<OpenNode>> m_openSet;
-	std::size_t m_maxCost = std::numeric_limits<decltype(m_maxCost)>::max();
-	std::function<bool(Vec2i)> isPassable;
-	HeuristicFunction m_heuristic = &Heuristic::roguelike;
+	PassableFunction m_isPassable;
+	HeuristicFunction m_heuristic;
 };
 
 inline std::size_t AStar::Heuristic::manhattan(const Vec2i& start, const Vec2i& end)

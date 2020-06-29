@@ -26,7 +26,7 @@ Game::Game(SDL_Window& window, Console& console)
 	m_player = entity.get();
 	m_entities.push_back(std::move(entity));
 
-	m_fov = std::make_unique<Fov>(mapWidth, mapHeight, [this] (const Vec2i& pos) { return m_map->at(pos).transparent; });
+	m_fov = std::make_unique<Fov>(mapWidth, mapHeight, [this] (const Vec2i& pos) { return !m_map->at(pos).transparent; });
 }
 
 bool Game::isRunning() const
