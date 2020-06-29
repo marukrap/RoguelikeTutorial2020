@@ -107,7 +107,7 @@ void Game::update()
 			if (m_fov->isVisible({ x, y }))
 				m_console.setChar(x, y, tile.ch, tile.color);
 
-			else if (m_fov->isExplroed({ x, y }))
+			else if (m_fov->isExplored({ x, y }))
 			{
 				Color color = tile.color;
 				color.r /= 5;

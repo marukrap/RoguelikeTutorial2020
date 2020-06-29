@@ -20,7 +20,7 @@ public:
 	void compute(const Vec2i& position, int range);
 
 	bool isVisible(const Vec2i& position) const;
-	bool isExplroed(const Vec2i& position) const;
+	bool isExplored(const Vec2i& position) const;
 
 private:
 	struct Shadow

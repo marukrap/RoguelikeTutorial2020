@@ -32,7 +32,7 @@ bool Fov::isVisible(const Vec2i& position) const
 	return m_visible[position.x + position.y * m_width];
 }
 
-bool Fov::isExplroed(const Vec2i& position) const
+bool Fov::isExplored(const Vec2i& position) const
 {
 	return m_explored[position.x + position.y * m_width];
 }
@@ -129,8 +129,6 @@ void Fov::refreshOctant(int octant, const Vec2i& start, int range)
 
 	m_shadows.clear();
 
-	bool fullShadow = false;
-
 	for (int row = 1; row <= range; ++row)
 	{
 		Vec2i pos = start + (rowInc * row);
@@ -144,16 +142,18 @@ void Fov::refreshOctant(int octant, const Vec2i& start, int range)
 			if ((pos - start).lengthSquared() > range * range)
 				break;
 
-			if (!fullShadow)
+			const Shadow projection = getProjection(col, row);
+
+			if (!isInShadow(projection))
 			{
-				const Shadow projection = getProjection(col, row);
+				setVisible(pos, true);
 
-				if (!isInShadow(projection))
+				if (m_blocksView(pos))
 				{
-					setVisible(pos, true);
+					const bool fullShadow = addShadow(projection);
 
-					if (m_blocksView(pos))
-						fullShadow = addShadow(projection);
+					if (fullShadow)
+						return;
 				}
 			}
 
