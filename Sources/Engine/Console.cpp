@@ -73,7 +73,7 @@ void Console::setChar(int x, int y, char ch, Color color)
 	}
 }
 
-void Console::setString(int x, int y, const std::string& string, Color color)
+void Console::setString(int x, int y, std::string_view string, Color color)
 {
 	int dx = 0;
 	int dy = 0;

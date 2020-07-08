@@ -8,8 +8,8 @@
 3. [Generating a dungeon](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part3.html)
 4. [Field of view](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part4.html)
 5. [Placing enemies and kicking them (harmlessly)](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part5.html)
-6. Doing (and taking) some damage
-7. Creating the Interface
+6. [Doing (and taking) some damage](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part6.html)
+7. [Creating the Interface](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part7.html)
 8. Items and Inventory
 9. Ranged Scrolls and Targeting
 10. Saving and loading

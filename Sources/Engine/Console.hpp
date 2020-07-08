@@ -6,7 +6,7 @@
 
 #include <SDL2/SDL_ttf.h>
 
-#include <string>
+#include <string_view>
 
 // Virtual console
 class Console
@@ -30,7 +30,7 @@ public:
 
 	char getChar(int x, int y) const;
 	void setChar(int x, int y, char ch, Color color = White);
-	void setString(int x, int y, const std::string& string, Color color = White);
+	void setString(int x, int y, std::string_view string, Color color = White);
 
 	void setColor(int x, int y, Color color);
 	void setColor(int left, int top, int width, int height, Color color);

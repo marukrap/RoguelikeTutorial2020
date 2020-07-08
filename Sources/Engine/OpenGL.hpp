@@ -9,6 +9,7 @@
 #endif
 
 #include <string>
+#include <string_view>
 
 struct SDL_Surface;
 
@@ -20,7 +21,7 @@ struct NonCopyable
 };
 
 // Check for any OpenGL errors and print them
-void GL_Errors(const std::string& message);
+void GL_Errors(std::string_view message);
 
 struct ShaderProgram : NonCopyable
 {
