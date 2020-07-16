@@ -25,10 +25,10 @@ public:
 	void setPosition(const Vec2i& position);
 	void move(int dx, int dy);
 
+	bool isDestroyed() const;
 	int getHp() const;
 	int getMaxHp() const;
 
-	bool isDestroyed() const;
 	void takeDamage(int damage);
 	void attack(Entity& target);
 

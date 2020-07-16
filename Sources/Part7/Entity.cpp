@@ -50,17 +50,17 @@ Color Entity::getColor() const
 
 std::string_view Entity::getName() const
 {
-	return m_data.name;
+	return m_name;
 }
 
 std::string Entity::getTheName() const
 {
 	std::string theName;
 
-	if (m_data.name != "you")
+	if (m_name != "you")
 		theName += "the ";
 
-	theName += m_data.name;
+	theName += m_name;
 
 	return theName;
 }
@@ -86,6 +86,11 @@ void Entity::move(int dx, int dy)
 	setPosition(m_position.x + dx, m_position.y + dy);
 }
 
+bool Entity::isDestroyed() const
+{
+	return m_hp <= 0;
+}
+
 int Entity::getHp() const
 {
 	return m_hp;
@@ -94,11 +99,6 @@ int Entity::getHp() const
 int Entity::getMaxHp() const
 {
 	return m_maxHp;
-}
-
-bool Entity::isDestroyed() const
-{
-	return m_hp <= 0;
 }
 
 void Entity::takeDamage(int damage)

@@ -26,6 +26,7 @@ public:
 	int getTileHeight() const;
 
 	void clear();
+	void clear(int left, int top, int width, int height, Color bgColor = Black);
 	bool isInBounds(int x, int y) const;
 
 	char getChar(int x, int y) const;
@@ -37,6 +38,8 @@ public:
 
 	void setBgColor(int x, int y, Color color);
 	void setBgColor(int left, int top, int width, int height, Color color);
+
+	void drawBox(int left, int top, int width, int height, Color color = White);
 
 	Atlas& getAtlas();
 	const std::vector<Sprite>& getSprites();

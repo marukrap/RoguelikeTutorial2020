@@ -10,8 +10,8 @@
 5. [Placing enemies and kicking them (harmlessly)](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part5.html)
 6. [Doing (and taking) some damage](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part6.html)
 7. [Creating the Interface](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part7.html)
-8. Items and Inventory
-9. Ranged Scrolls and Targeting
+8. [Items and Inventory](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part8.html)
+9. [Ranged Scrolls and Targeting](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part9.html)
 10. Saving and loading
 11. Delving into the Dungeon
 12. Increasing Difficulty

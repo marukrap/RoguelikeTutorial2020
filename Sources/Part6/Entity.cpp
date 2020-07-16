@@ -49,17 +49,17 @@ Color Entity::getColor() const
 
 std::string_view Entity::getName() const
 {
-	return m_data.name;
+	return m_name;
 }
 
 std::string Entity::getTheName() const
 {
 	std::string theName;
 
-	if (m_data.name != "you")
+	if (m_name != "you")
 		theName += "the ";
 
-	theName += m_data.name;
+	theName += m_name;
 
 	return theName;
 }
