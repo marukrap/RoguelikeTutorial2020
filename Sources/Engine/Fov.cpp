@@ -37,6 +37,26 @@ bool Fov::isExplored(const Vec2i& position) const
 	return m_explored[position.x + position.y * m_width];
 }
 
+void Fov::save(std::vector<bool>& explored)
+{
+	explored.swap(m_explored);
+}
+
+void Fov::load(std::vector<bool>& explored)
+{
+	m_explored.swap(explored);
+}
+
+void Fov::save(std::ostream& os)
+{
+	serialize(os, m_explored);
+}
+
+void Fov::load(std::istream& is)
+{
+	deserialize(is, m_explored);
+}
+
 bool Fov::Shadow::contains(const Shadow& projection) const
 {
 	return start <= projection.start && end >= projection.end;

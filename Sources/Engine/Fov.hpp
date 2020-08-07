@@ -3,12 +3,13 @@
 #pragma once
 
 #include "Vector2.hpp"
+#include "Serializable.hpp"
 
 #include <functional>
 #include <vector>
 
 // Field of view
-class Fov
+class Fov : public Serializable
 {
 public:
 	using BlocksViewFunction = std::function<bool(Vec2i)>;
@@ -21,6 +22,12 @@ public:
 
 	bool isVisible(const Vec2i& position) const;
 	bool isExplored(const Vec2i& position) const;
+
+	void save(std::vector<bool>& explored);
+	void load(std::vector<bool>& explored);
+
+	[[deprecated]] void save(std::ostream& os) override;
+	[[deprecated]] void load(std::istream& is) override;
 
 private:
 	struct Shadow

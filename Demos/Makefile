@@ -19,10 +19,14 @@ SOURCES = \
 	../Sources/Engine/*.cpp \
 
 TARGETS = Part1 Part2 Part3 Part4 Part5 Part6 Part7 Part8 Part9
+TARGETS2 = Part10 Part11
 
-all : $(TARGETS)
+all : $(TARGETS) $(TARGETS2)
 
 $(TARGETS) : $(SOURCES) ../Sources/$@/*.cpp
+	$(EMCC) -I../Sources/$@ $(CPPFLAGS) $(EMFLAGS) $** -o $@.html
+	
+$(TARGETS2) : $(SOURCES) ../Sources/$@/*.cpp ../Sources/$@/Entity/*.cpp ../Sources/$@/Menu/*.cpp
 	$(EMCC) -I../Sources/$@ $(CPPFLAGS) $(EMFLAGS) $** -o $@.html
 
 clean :

@@ -12,7 +12,7 @@
 7. [Creating the Interface](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part7.html)
 8. [Items and Inventory](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part8.html)
 9. [Ranged Scrolls and Targeting](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part9.html)
-10. Saving and loading
+10. [Saving and loading](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part10.html)
 11. Delving into the Dungeon
 12. Increasing Difficulty
 13. Gearing up
