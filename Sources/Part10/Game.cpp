@@ -80,7 +80,8 @@ Game::~Game()
 
 void Game::save(std::ostream& os)
 {
-	m_world.save(os);
+	if (m_world.getPlayerActor())
+		m_world.save(os);
 }
 
 void Game::load(std::istream& is)

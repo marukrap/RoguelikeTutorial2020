@@ -12,6 +12,8 @@ EMFLAGS = \
 	-s USE_SDL_IMAGE=2 \
 	-s USE_SDL_TTF=2 \
 	-s SDL2_IMAGE_FORMATS=["png"] \
+	-s ALLOW_MEMORY_GROWTH=1 \
+	--no-heap-copy \
 	--preload-file Fonts \
 	--shell-file shell_minimal.html \
 
@@ -25,7 +27,7 @@ all : $(TARGETS) $(TARGETS2)
 
 $(TARGETS) : $(SOURCES) ../Sources/$@/*.cpp
 	$(EMCC) -I../Sources/$@ $(CPPFLAGS) $(EMFLAGS) $** -o $@.html
-	
+
 $(TARGETS2) : $(SOURCES) ../Sources/$@/*.cpp ../Sources/$@/Entity/*.cpp ../Sources/$@/Menu/*.cpp
 	$(EMCC) -I../Sources/$@ $(CPPFLAGS) $(EMFLAGS) $** -o $@.html
 

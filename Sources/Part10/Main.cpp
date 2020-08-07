@@ -24,7 +24,8 @@ const char* beforeunload_callback(int eventType, const void* reserved, void* use
 	std::ostringstream oss;
 	game->save(oss);
 	std::string str = oss.str();
-	emscripten_idb_async_store("Save", "Savefile", &str[0], str.size(), 0, onstore, onerror);
+	if (!str.empty())
+		emscripten_idb_async_store("Save", "Savefile", &str[0], str.size(), 0, onstore, onerror);
 
 	return "";
 }
