@@ -25,7 +25,7 @@ const char* beforeunload_callback(int eventType, const void* reserved, void* use
 	game->save(oss);
 	std::string str = oss.str();
 	if (!str.empty())
-		emscripten_idb_async_store("Save", "Savefile", &str[0], str.size(), 0, onstore, onerror);
+		emscripten_idb_async_store("Part10", "Savefile", &str[0], str.size(), 0, onstore, onerror);
 
 	return "";
 }
@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 	SDL_Init(SDL_INIT_VIDEO);
 
 	TTF_Init();
-	TTF_Font* font = TTF_OpenFont("Fonts/RecMono-Casual-1.52.ttf", 20);
+	TTF_Font* font = TTF_OpenFont("Fonts/RecMono-Casual.ttf", 20);
 
 	constexpr int consoleWidth = 80;
 	constexpr int consoleHeight = 30;

@@ -33,7 +33,7 @@ namespace
 		{
 			auto* menu = static_cast<MainMenu*>(arg);
 			menu->setHasSavefile();
-			emscripten_idb_async_load("Save", "Savefile", (void*)&iss, onload, onerror);
+			emscripten_idb_async_load("Part11", "Savefile", (void*)&iss, onload, onerror);
 		}
 	}
 }
@@ -43,7 +43,7 @@ MainMenu::MainMenu(World& world)
 	: m_world(world)
 {
 #ifdef __EMSCRIPTEN__
-	emscripten_idb_async_exists("Save", "Savefile", (void*)this, oncheck, onerror);
+	emscripten_idb_async_exists("Part11", "Savefile", (void*)this, oncheck, onerror);
 
 	m_buttons.emplace_back("New Game");
 	m_callbacks.emplace_back([this] ()
@@ -52,7 +52,7 @@ MainMenu::MainMenu(World& world)
 		m_world.createLevel(rng.getSeed(), true);
 
 		if (m_hasSavefile)
-			emscripten_idb_async_delete("Save", "Savefile", 0, ondelete, onerror);
+			emscripten_idb_async_delete("Part11", "Savefile", 0, ondelete, onerror);
 	});
 
 	m_buttons.emplace_back("Continue");
@@ -61,7 +61,7 @@ MainMenu::MainMenu(World& world)
 		if (m_hasSavefile)
 		{
 			m_world.load(iss);
-			emscripten_idb_async_delete("Save", "Savefile", 0, ondelete, onerror);
+			emscripten_idb_async_delete("Part11", "Savefile", 0, ondelete, onerror);
 		}
 	});
 #else

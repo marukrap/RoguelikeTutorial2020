@@ -25,13 +25,13 @@ namespace
 		iss.write(reinterpret_cast<const char*>(ptr), num);
 		Game* game = static_cast<Game*>(arg);
 		game->load(iss);
-		emscripten_idb_async_delete("Save", "Savefile", 0, ondelete, onerror);
+		emscripten_idb_async_delete("Part10", "Savefile", 0, ondelete, onerror);
 	}
 
 	void oncheck(void* arg, int exists)
 	{
 		if (exists)
-			emscripten_idb_async_load("Save", "Savefile", arg, onload, onerror);
+			emscripten_idb_async_load("Part10", "Savefile", arg, onload, onerror);
 		
 		else
 		{
@@ -51,7 +51,7 @@ Game::Game(SDL_Window& window, Console& console)
 	glClearColor(0.f, 0.f, 0.f, 1.f);
 
 #ifdef __EMSCRIPTEN__
-	emscripten_idb_async_exists("Save", "Savefile", (void*)this, oncheck, onerror);
+	emscripten_idb_async_exists("Part10", "Savefile", (void*)this, oncheck, onerror);
 #else
 	if (std::filesystem::exists("Save/Savefile"))
 	{

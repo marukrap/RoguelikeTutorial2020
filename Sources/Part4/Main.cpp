@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	SDL_Init(SDL_INIT_VIDEO);
 
 	TTF_Init();
-	TTF_Font* font = TTF_OpenFont("Fonts/RecMono-Casual-1.52.ttf", 20);
+	TTF_Font* font = TTF_OpenFont("Fonts/RecMono-Casual.ttf", 20);
 
 	constexpr int consoleWidth = 80;
 	constexpr int consoleHeight = 25;
