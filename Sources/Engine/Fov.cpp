@@ -39,12 +39,14 @@ bool Fov::isExplored(const Vec2i& position) const
 
 void Fov::save(std::vector<bool>& explored)
 {
-	explored.swap(m_explored);
+	//explored.swap(m_explored);
+	explored = m_explored;
 }
 
 void Fov::load(std::vector<bool>& explored)
 {
-	m_explored.swap(explored);
+	//m_explored.swap(explored);
+	m_explored = explored;
 }
 
 void Fov::save(std::ostream& os)
