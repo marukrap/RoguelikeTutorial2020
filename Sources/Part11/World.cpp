@@ -472,8 +472,6 @@ void World::save(std::ostream& os)
 
 void World::load(std::istream& is)
 {
-	// TODO: 게임 로드 후 적 액터들의 타겟(플레이어) 재지정
-
 	std::size_t numLevels;
 	deserialize(is, numLevels);
 

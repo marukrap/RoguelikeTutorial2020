@@ -1,7 +1,5 @@
 #include "Rng.hpp"
 
-#include <cassert>
-
 namespace
 {
 	std::mt19937 RandomEngine(std::random_device{}());

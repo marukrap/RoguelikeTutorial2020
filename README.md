@@ -14,5 +14,8 @@
 9. [Ranged Scrolls and Targeting](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part9.html)
 10. [Saving and loading](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part10.html)
 11. [Delving into the Dungeon](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part11.html)
-12. Increasing Difficulty
-13. Gearing up
+12. [Increasing Difficulty](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part12.html)
+13. [Gearing up](https://marukrap.github.io/RoguelikeTutorial2020/Demos/Part13.html)
+
+### Extras
+1. Multi-language
